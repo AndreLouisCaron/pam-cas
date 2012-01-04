@@ -1,0 +1,19 @@
+#%PAM-1.0
+# Replace the following to complete the configuration:
+#  ${PATH_TO_CAS_MODULE} -- absolute path to "cas.py", often is "/lib/security/cas.py";
+#  ${HOST_NAME}          -- host name or IP address of the CAS server;
+#  ${SERVICE_NAME}       -- name provided by the client to the cas server;
+#  ${ALLOWED_USERS}      -- comma-separated list of user names.  users not in this
+#                           list will not be allowed access, even if they are
+#                           authentified against the server.  an empty list grants
+#                           access to all users the server authentifies.
+auth required pam_python.so \
+  ${PATH_TO_CAS_MODULE} \
+  verbose=yes \
+  hostname=${HOST_NAME}/ service=${SERVICE_NAME} \
+  users=${ALLOWED_USERS}
+account required pam_python.so \
+  ${PATH_TO_CAS_MODULE} \
+  verbose=yes \
+  hostname=${HOST_NAME} service=${SERVICE_NAME} \
+  users=${ALLOWED_USERS}
